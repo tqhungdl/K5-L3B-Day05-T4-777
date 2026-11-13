@@ -25,11 +25,11 @@
 
 - 3 việc tính năng KHÔNG làm, mỗi việc một câu vì sao.
 
-|  |  |  |
-|---|---|---|
-|  |  |  |
-|  |  |  |
-|  |  |  |
+| Tính năng KHÔNG làm                                   | Lý do                                                         |
+| ----------------------------------------------------- | ------------------------------------------------------------- |
+| Cung cấp thông tin cá nhân của nguời mua và người bán | Vi phạm quyền riêng tư, không hữu ích trong xử lý tranh chấp. |
+| Không tự thay đổi thông tin trả hàng.                 | Vi phạm chính sách của sàn.                                   |
+| Tự kết luận hàng giả và xử phạt shop.                 | Cần xác minh chuyên môn; hậu quả vượt một đơn hàng.           |
 
 ## §2. Kịch bản rủi ro (chặng 2)
 
