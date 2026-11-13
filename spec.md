@@ -62,43 +62,88 @@
 
 ## §3. Khi AI sai (chặng 3)
 
-Với mỗi kịch bản đắt nhất:
+**Quy ước thiết kế của nhóm:** các mốc dưới đây là dữ liệu dựng để kiểm thử, không phải cam kết hay chính sách thật của Shopee. Khi chuyển hồ sơ, mục tiêu là nhân viên phản hồi lần đầu trong 24 giờ, không hứa giải quyết xong trong 24 giờ. Mốc phản hồi của shop được hiện bằng ngày giờ cụ thể trong fixture; không lấy mốc này thay cho hạn gửi yêu cầu của người mua. Chuyển người không đồng nghĩa đã gửi yêu cầu trả hàng hoặc được gia hạn. Nếu chưa có dữ liệu hạn, giao diện ghi “Chưa xác định hạn — cần nhân viên kiểm tra”, không tự đoán.
 
-- AI nói gì (nguyên văn) · người dùng thấy gì · làm gì tiếp · ai được báo, sau bao lâu.
-- Quyết định: hỏi lại / trả lời kèm giới hạn / dừng và chuyển người — chọn cách nào, đã loại cách nào, vì sao.
-- Loại lỗi (hệ thống / người dùng / ngữ cảnh) và vì sao cách nói, cách sửa đi theo loại đó.
-- 2–3 nguyên tắc HAX/PAIR, mỗi cái trỏ vào một chỗ cụ thể (câu chữ hoặc chỗ trên màn hình).
-- Lỗi nào sửa câu chữ không cứu được (nếu có), và thiết kế cứu nó thế nào.
+### K04 — Mô tả bị sửa sau khi mua
 
-### Kịch bản K4:
+**Bối cảnh:** “Lúc mua ghi cotton 100%, giờ shop sửa thành cotton pha rồi bảo tôi đọc nhầm.” Bản mô tả lúc đặt chưa có trong hồ sơ. Căn cứ: K04 ở §2; track yêu cầu so với mô tả lúc đặt, trong khi `tu_choi_khieu_nai` đóng hồ sơ và chuyển tiền cho người bán, khó đảo lại.
 
-Tin nhắn người dùng: "Lúc mua ghi cotton 100%, giờ shop sửa thành cotton pha rồi bảo tôi đọc nhầm." Bản mô tả lúc đặt chưa có trong hồ sơ.
+#### 1. AI nói gì — nguyên văn
 
-#### 1. AI nói gì
+> “Mình chưa có bản mô tả tại thời điểm bạn đặt hàng nên chưa đủ căn cứ kết luận. Mô tả hiện tại không chứng minh nội dung lúc mua. Hồ sơ cần được nhân viên kiểm tra; bạn có thể bổ sung ảnh chụp hoặc thông tin đã lưu lúc mua, hoặc chọn ‘Tôi không có bản lưu’. Bạn không cần có ảnh lưu mới được chuyển kiểm tra. Hiện chưa có quyết định hoàn tiền hay từ chối.”
 
-"Mình chưa có bản mô tả tại thời điểm bạn đặt hàng nên chưa đủ căn cứ kết luận. Mô tả hiện tại có thể đã thay đổi. Bạn có thể bổ sung ảnh chụp màn hình hoặc thông tin đã lưu lúc mua; nếu không có, bạn vẫn có thể yêu cầu nhân viên kiểm tra. Hiện chưa có quyết định hoàn tiền hay từ chối."
+#### 2. Người dùng thấy gì
 
-#### 2. Nguời dùng thấy gì
+- Trạng thái **“Chưa đủ căn cứ — cần đối chiếu mô tả lúc mua”**.
+- Thẻ bằng chứng tách ba phần: lời người mua “cotton 100%”; mô tả hiện tại “cotton pha”; mô tả lúc đặt **“Chưa có”**. Lời khai không được gắn nhãn đã xác minh. Nguồn và thời điểm chỉ hiện khi có dữ liệu; không bịa ngày hoặc đường dẫn bản lưu.
+- Các nút **“Bổ sung bằng chứng”**, **“Tôi không có bản lưu / Yêu cầu nhân viên kiểm tra”**, **“Sửa thông tin”**. Bằng chứng được gắn nhãn “Chờ xác minh”; không có nút để AI tự hoàn tiền hay từ chối.
+- Hiện hạn gửi yêu cầu của người mua riêng với hạn phản hồi của shop, kèm trạng thái yêu cầu đã gửi hay chưa. Nếu chưa gửi, hướng dẫn bước gửi trong hạn, không bảo khách chỉ chờ nhân viên.
 
-Trạng thái: “Chưa đủ căn cứ — cần đối chiếu mô tả lúc mua”.
+#### 3. Làm gì tiếp; ai được báo, sau bao lâu
 
-Hai lựa chọn:
-- Cung cấp bằng chứng
-- Yêu cầu nhân viên kiểm tra
+- Dù có hay không có bản lưu, hồ sơ đều đi qua `chuyen_truong_nhom` để trưởng nhóm/nhân viên được phân công đối chiếu nguồn và thời điểm; ảnh người mua gửi là căn cứ cần kiểm tra, chưa tự chứng minh shop đã sửa mô tả. Không bắt khách tìm ảnh vô hạn hoặc mặc định ảnh là giả.
+- Khi chuyển thành công, người mua thấy mã hồ sơ, trạng thái **“Đã chuyển — chờ nhân viên”** và thời điểm dự kiến phản hồi lần đầu trong 24 giờ. Chỉ báo đã chuyển sau khi tool xác nhận thành công; nếu lỗi, hiện **“Chuyển chưa thành công”** và nút thử lại.
+- Trưởng nhóm được báo ngay khi chuyển thành công, nhận lời trình bày, bằng chứng hiện có, nguồn/thời điểm, mục còn thiếu và các hạn liên quan. Người bán nhận yêu cầu cung cấp bản mô tả lúc mua hoặc bằng chứng liên quan qua `yeu_cau_bang_chung`, kèm hạn phản hồi cụ thể; thông báo cho hai bên không chứa số điện thoại, địa chỉ của bên kia.
+- Nếu người mua không làm gì, hồ sơ vẫn được chuyển với ghi chú “Chưa bổ sung bản lưu”; không tự từ chối vì thiếu ảnh. Nếu quá mục tiêu 24 giờ chưa có phản hồi đầu tiên, giao diện báo chậm và hồ sơ được đánh dấu quá hạn cho trưởng nhóm theo dõi. Đây là cơ chế hàng đợi/thông báo đề xuất, cần thể hiện trong prototype; AI không có tool tự gia hạn hay tự quyết thay người.
 
-#### 3. Làm gì tiếp
+#### 4. Quyết định và phương án đã loại
 
-Với cả hai lựa chọn, AI đều chuyển hồ sơ cho nhân viên kèm bằng chứng nếu có. Nguyên nhân là có thể bằng chứng là giả, cần để chuyên gia xem xét.
+- **Chọn dừng kết luận và chuyển người**, đồng thời cho bổ sung bằng chứng: dữ liệu thiếu nằm ở thời điểm mua; nhân viên cần kiểm tra nguồn và nghe cả hai bên. Chuyển người dừng quyết định tiền bạc, không dừng hướng dẫn gửi yêu cầu đúng hạn.
+- **Loại chỉ hỏi lại:** người mua có thể không có bản lưu; hỏi lặp không khôi phục được dữ liệu lịch sử và có thể làm hết hạn.
+- **Loại chỉ trả lời kèm giới hạn rồi để khách tự xử lý:** nói “chưa chắc” không giải quyết tranh chấp hoặc ngăn `tu_choi_khieu_nai` dùng sai nguồn. Phải có người nhận hồ sơ và trạng thái theo dõi cụ thể.
 
-#### 4. Báo sau bao lâu
+#### 5. Loại lỗi và cách sửa
 
-Người dùng được thông báo hồ sơ đã chuyển cho ban phòng xem xét. Hồ sơ sẽ được xử lý trong 24 giờ.
+**Lỗi hệ thống:** dùng mô tả hiện tại thay cho mô tả lúc đặt là lỗi chọn nguồn/thời điểm, không phải lỗi người mua vì không lưu ảnh. Nếu AI đã kết luận sai, nói: **“Mình đã dùng mô tả hiện tại để đánh giá nội dung lúc bạn mua. Căn cứ đó chưa đủ; mình xin đính chính kết luận vừa rồi và chuyển hồ sơ để kiểm tra.”** Đồng thời đánh dấu kết luận cũ không còn là căn cứ và gửi đính chính cho người đang xử lý. Nếu đã đóng hồ sơ/chuyển tiền, phải báo trưởng nhóm xử lý hậu quả; không tuyên bố đã hoàn tác vì track không có tool hoàn tác quyết định này.
 
-Nhân viên được báo tiếp nhận hồ sơ kèm bằng chứng nếu có.
+### K07 — Tem khớp mô tả nhưng ảnh gây tranh chấp
 
-### 5. Quyết định
+**Bối cảnh:** “Shop gửi sai màu, hoàn tiền ngay!” Đơn đặt navy, tem ghi navy, ảnh trông gần đen; shop chưa phản hồi và vẫn còn hạn. Kết quả dựng sau xác minh là hàng đúng navy, nhưng AI chưa được biết kết quả đó lúc quyết định. Căn cứ: K07 ở §2; cả `soan_hoan_tien` và `tu_choi_khieu_nai` đều chuyển tiền và khó đảo lại.
 
-Chọn dừng
+#### 1. AI nói gì — nguyên văn
+
+> “Đơn của bạn đặt màu navy và tem cũng ghi navy, nhưng tem chưa đủ để kết luận màu hàng thực tế. Ảnh hiện tại trông gần đen; ánh sáng hoặc màn hình có thể ảnh hưởng màu hiển thị. Shop vẫn còn thời gian phản hồi. Bạn có thể bổ sung ảnh hàng và tem chụp cùng khung hình dưới ánh sáng tự nhiên nếu chưa có; mình chưa kết luận bên nào đúng và chưa thực hiện hoàn tiền hay đóng khiếu nại. Nếu bạn vẫn không đồng ý với phần đối chiếu, hãy chọn ‘Yêu cầu nhân viên kiểm tra’.”
+
+#### 2. Người dùng thấy gì
+
+- Trạng thái **“Chờ đối chiếu và phản hồi của shop — chưa có quyết định”**.
+- Ba bằng chứng đặt cạnh nhau: màu lúc đặt “navy”, tem “navy”, ảnh khách gửi. Chú thích **“Tem khớp; màu hàng thực tế chưa xác minh”**, không hiện phần trăm chắc chắn không có căn cứ.
+- Hạn phản hồi của shop bằng ngày giờ và thời gian còn lại; hạn gửi yêu cầu của khách hiển thị riêng. Nút **“Bổ sung ảnh”**, **“Sửa thông tin / ảnh gửi nhầm”**, **“Yêu cầu nhân viên kiểm tra”**.
+- Phía shop thấy nội dung khiếu nại, bằng chứng liên quan và hạn phản hồi; có chỗ bổ sung bằng chứng hoặc xác nhận giao nhầm, không thấy dữ liệu liên hệ riêng của khách.
+
+#### 3. Làm gì tiếp; ai được báo, sau bao lâu
+
+- AI kiểm tra ảnh đã nhận trước khi gọi `yeu_cau_bang_chung`, chỉ xin phần thiếu và giải thích ảnh dùng để đối chiếu màu thực tế. Shop nhận yêu cầu phản hồi ngay khi tool gửi thành công; việc shop chưa trả lời khi còn hạn không được diễn giải là nhận lỗi.
+- Nếu khách bổ sung ảnh, giao diện xác nhận đã nhận và vẫn ghi “Chờ xác minh”. Nếu khách sửa màu đặt hoặc báo ảnh nhầm, AI xác nhận nội dung mới, đánh dấu ảnh cũ không dùng để quyết định và cập nhật cho người đang xử lý; không bắt đầu lại hồ sơ.
+- Khách có thể chuyển trưởng nhóm ngay bằng `chuyen_truong_nhom`. Nếu hết hạn shop phản hồi mà chưa thống nhất, hồ sơ cũng chuyển trưởng nhóm; không tự hoàn hoặc từ chối do một bên im lặng. Trưởng nhóm nhận cả bằng chứng thuận/nghịch, phần chưa xác minh, phản hồi hai bên và các hạn; sau chuyển thành công áp dụng mục tiêu phản hồi đầu tiên trong 24 giờ và cách báo chậm như K04.
+- Nếu khách không thao tác, tiếp tục chờ phản hồi trong hạn đã hiện; hết hạn mà chưa giải quyết thì chuyển người. Chuyển sớm không rút ngắn cơ hội phản hồi của shop. Nếu chuyển thất bại, hiện rõ trạng thái lỗi và cho thử lại, không báo đã có nhân viên tiếp nhận.
+
+#### 4. Quyết định và phương án đã loại
+
+- **Chọn trả lời kèm giới hạn và xin đúng bằng chứng còn thiếu; chuyển người khi còn tranh chấp, hết hạn phản hồi hoặc khách yêu cầu.** Đã biết đơn và điểm tranh chấp nên có thể giải thích phần tem khớp, nhưng chưa đủ để quyết định tiền bạc.
+- **Loại chỉ hỏi lại “Bạn đặt màu gì?”:** dữ liệu đã có navy; hỏi lại không giải quyết khác biệt giữa tem và màu thực tế, làm khách mất công.
+- **Loại chuyển người ngay cho mọi ca:** có thể thu thập phần thiếu và nhận phản hồi shop trước, giảm chờ cho ca hai bên sớm thống nhất. Vẫn giữ nút chuyển người ngay và không dùng bước bổ sung để ngăn khách tiếp cận nhân viên.
+- **Loại kết luận từ một bằng chứng:** hoàn theo màu ảnh có thể làm shop đúng mất tiền; từ chối theo tem có thể làm người mua chịu thiệt. Kết quả dựng cuối cùng “shop đúng” không hợp thức hóa quyết định sớm khi chưa xác minh và shop còn hạn phản hồi.
+
+#### 5. Loại lỗi và cách sửa
+
+**Lỗi ngữ cảnh** nếu hệ thống đọc đúng tem navy nhưng coi tem là đủ để trả lời tranh chấp về màu thực tế. Nếu đọc sai ảnh/tem thì là **lỗi hệ thống**. Không gọi việc khách thấy màu khác là lỗi người dùng khi chưa xác minh.
+
+Nếu đã nói “Shop giao đúng màu”, đính chính: **“Mình đã kết luận quá sớm chỉ từ tem navy. Tem chưa xác minh được màu hàng thực tế; mình xin đính chính và sẽ đối chiếu thêm bằng chứng cùng phản hồi của shop.”** Cách sửa là tách “tem khớp” khỏi “hàng thực tế đúng”, giữ cơ hội phản hồi và chuyển người nếu chưa thống nhất. Nếu đã phát sinh chuyển tiền, báo trưởng nhóm xử lý, không hứa tự đảo giao dịch.
+
+### Ba nguyên tắc HAX/PAIR áp dụng cho K04 và K07
+
+| Nguyên tắc | Chỗ cụ thể ở K04 | Chỗ cụ thể ở K07 |
+| --- | --- | --- |
+| **G10 — Thu hẹp phạm vi khi nghi ngờ** | Câu “Mô tả hiện tại không chứng minh nội dung lúc mua”; dừng kết luận và chuyển người khi thiếu bản lúc đặt | Nhãn “Tem khớp; màu hàng thực tế chưa xác minh”; chưa hoàn hay từ chối khi bằng chứng còn mâu thuẫn |
+| **G11 — Giải thích vì sao** | Thẻ tách lời người mua, mô tả hiện tại và bản lúc đặt còn thiếu, kèm nguồn/thời điểm nếu có | Hiện màu đặt, tem và ảnh cạnh nhau; giải thích giới hạn của ảnh và lý do chờ phản hồi shop |
+| **G9 — Sửa dễ dàng** | Nút “Sửa thông tin”, cho bổ sung bản lưu; đính chính kết luận cũ và gửi cho người xử lý | Nút “Sửa thông tin / ảnh gửi nhầm”; đánh dấu ảnh cũ không dùng và cập nhật hồ sơ thay vì bắt khách làm lại |
+
+### Lỗi câu chữ không cứu được và cơ chế thiết kế
+
+- **K04:** AI nói “chưa chắc” nhưng vẫn gọi `tu_choi_khieu_nai` thì người mua vẫn có thể mất tiền. Cần chặn quyết định dựa riêng vào mô tả hiện tại khi thiếu căn cứ lúc mua; tách rõ nguồn/thời điểm và chuyển người kiểm tra. Câu xin lỗi không đảo được tiền đã chuyển.
+- **K07:** AI nói “đang chờ shop” nhưng gọi `soan_hoan_tien` hoặc `tu_choi_khieu_nai` trước khi đủ căn cứ thì một bên vẫn chịu thiệt. Cần chặn quyết định khi còn tranh chấp chưa xác minh hoặc shop vẫn còn hạn phản hồi; hết hạn không tự coi im lặng là thừa nhận. Đây là ràng buộc cần cụ thể hóa ở §4 và thể hiện trạng thái bị chặn trên prototype.
+- **Đối chiếu bốn đường trải nghiệm:** bình thường — đủ căn cứ, hai bên thống nhất thì đi tới bước xử lý theo mức duyệt ở §4; thiếu chắc chắn — K07 xin đúng phần thiếu và chờ phản hồi; thiếu căn cứ — K04 chuyển người; người dùng sửa AI — cả hai ca đều có nút sửa, lưu đính chính và cập nhật người tiếp nhận. Việc hai bên thống nhất không tự cấp quyền để AI chuyển tiền.
 
 ## §4. Mức tự chủ (chặng 4)
 
