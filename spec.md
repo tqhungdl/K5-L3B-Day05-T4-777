@@ -62,8 +62,6 @@
 
 ## §3. Khi AI sai (chặng 3)
 
-**Quy ước thiết kế của nhóm:** các mốc dưới đây là dữ liệu dựng để kiểm thử, không phải cam kết hay chính sách thật của Shopee. Khi chuyển hồ sơ, mục tiêu là nhân viên phản hồi lần đầu trong 24 giờ, không hứa giải quyết xong trong 24 giờ. Mốc phản hồi của shop được hiện bằng ngày giờ cụ thể trong fixture; không lấy mốc này thay cho hạn gửi yêu cầu của người mua. Chuyển người không đồng nghĩa đã gửi yêu cầu trả hàng hoặc được gia hạn. Nếu chưa có dữ liệu hạn, giao diện ghi “Chưa xác định hạn — cần nhân viên kiểm tra”, không tự đoán.
-
 ### K04 — Mô tả bị sửa sau khi mua
 
 **Bối cảnh:** “Lúc mua ghi cotton 100%, giờ shop sửa thành cotton pha rồi bảo tôi đọc nhầm.” Bản mô tả lúc đặt chưa có trong hồ sơ. Căn cứ: K04 ở §2; track yêu cầu so với mô tả lúc đặt, trong khi `tu_choi_khieu_nai` đóng hồ sơ và chuyển tiền cho người bán, khó đảo lại.
@@ -133,11 +131,11 @@ Nếu đã nói “Shop giao đúng màu”, đính chính: **“Mình đã kế
 
 ### Ba nguyên tắc HAX/PAIR áp dụng cho K04 và K07
 
-| Nguyên tắc | Chỗ cụ thể ở K04 | Chỗ cụ thể ở K07 |
-| --- | --- | --- |
-| **G10 — Thu hẹp phạm vi khi nghi ngờ** | Câu “Mô tả hiện tại không chứng minh nội dung lúc mua”; dừng kết luận và chuyển người khi thiếu bản lúc đặt | Nhãn “Tem khớp; màu hàng thực tế chưa xác minh”; chưa hoàn hay từ chối khi bằng chứng còn mâu thuẫn |
-| **G11 — Giải thích vì sao** | Thẻ tách lời người mua, mô tả hiện tại và bản lúc đặt còn thiếu, kèm nguồn/thời điểm nếu có | Hiện màu đặt, tem và ảnh cạnh nhau; giải thích giới hạn của ảnh và lý do chờ phản hồi shop |
-| **G9 — Sửa dễ dàng** | Nút “Sửa thông tin”, cho bổ sung bản lưu; đính chính kết luận cũ và gửi cho người xử lý | Nút “Sửa thông tin / ảnh gửi nhầm”; đánh dấu ảnh cũ không dùng và cập nhật hồ sơ thay vì bắt khách làm lại |
+| Nguyên tắc                             | Chỗ cụ thể ở K04                                                                                            | Chỗ cụ thể ở K07                                                                                           |
+| -------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| **G10 — Thu hẹp phạm vi khi nghi ngờ** | Câu “Mô tả hiện tại không chứng minh nội dung lúc mua”; dừng kết luận và chuyển người khi thiếu bản lúc đặt | Nhãn “Tem khớp; màu hàng thực tế chưa xác minh”; chưa hoàn hay từ chối khi bằng chứng còn mâu thuẫn        |
+| **G11 — Giải thích vì sao**            | Thẻ tách lời người mua, mô tả hiện tại và bản lúc đặt còn thiếu, kèm nguồn/thời điểm nếu có                 | Hiện màu đặt, tem và ảnh cạnh nhau; giải thích giới hạn của ảnh và lý do chờ phản hồi shop                 |
+| **G9 — Sửa dễ dàng**                   | Nút “Sửa thông tin”, cho bổ sung bản lưu; đính chính kết luận cũ và gửi cho người xử lý                     | Nút “Sửa thông tin / ảnh gửi nhầm”; đánh dấu ảnh cũ không dùng và cập nhật hồ sơ thay vì bắt khách làm lại |
 
 ### Lỗi câu chữ không cứu được và cơ chế thiết kế
 
