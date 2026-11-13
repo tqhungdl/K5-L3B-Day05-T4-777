@@ -8,11 +8,11 @@
 
 **Lớp:** L3B · **Track:** 4
 
-| Họ và Tên       | Mã Học Viên | Việc đã làm |
-| --------------- | ----------- | ----------- |
-| Trần Quang Hưng | 2A202603767 | §1. Lát cắt, hỗ trợ §3. |
-| Vũ Tuấn Đạt     | 03744       |             |
-| Nguyễn Tiến Đạt | 2A202603752 |             |
+| Họ và Tên       | Mã Học Viên | Việc đã làm                                  |
+| --------------- | ----------- | -------------------------------------------- |
+| Trần Quang Hưng | 2A202603767 | §1. Lát cắt, hỗ trợ §3.                      |
+| Vũ Tuấn Đạt     | 03744       |                                              |
+| Nguyễn Tiến Đạt | 2A202603752 | Xây dựng kịch bản, phân tích kịch bản, tools |
 
 ## §1. Lát cắt & phạm vi
 
@@ -179,10 +179,10 @@ Nếu đã nói “Shop giao đúng màu”, đính chính: **“Mình đã kế
 
 **Cách chốt trong thiết kế:** chọn cần duyệt, tách bản nháp khỏi thực thi để giảm chờ chuẩn bị hồ sơ; không lấy mục tiêu xử lý nhanh làm lý do bỏ xác minh ở K07.
 
-| Thành viên      | Mức tự chọn ban đầu và lý do |
-| --------------- | ---------------------------- |
-| Trần Quang Hưng | **`tu_choi_khieu_nai` - cần người duyệt:** cả K4 và K7 đều có khả năng gây thiệt hại khi gọi `tu_choi_khieu_nai` tự động, làm người mua mất tiền và người bán mất uy tín. |
-| Vũ Tuấn Đạt     | Chưa ghi nhận                |
+| Thành viên      | Mức tự chọn ban đầu và lý do                                                                                                                                                                                                                  |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Trần Quang Hưng | **`tu_choi_khieu_nai` - cần người duyệt:** cả K4 và K7 đều có khả năng gây thiệt hại khi gọi `tu_choi_khieu_nai` tự động, làm người mua mất tiền và người bán mất uy tín.                                                                     |
+| Vũ Tuấn Đạt     | Chưa ghi nhận                                                                                                                                                                                                                                 |
 | Nguyễn Tiến Đạt | **`yeu_cau_bang_chung` — cần người duyệt:** K10 cho thấy hỏi lặp khiến khách mất công, tin đã gửi không thu hồi được. Đổi lại, duyệt từng tin làm chậm xử lý; chấp nhận nhóm chọn tự làm nếu kiểm tra bằng chứng đã có và chỉ xin phần thiếu. |
 
 ### 4.5. Kiểm thử thiết kế trên ba kịch bản
@@ -220,49 +220,52 @@ Mức cần duyệt của `soan_hoan_tien` khiến lời hứa phải là **“c
   4. Màn **Nhân viên duyệt**: tick “đã xác minh màu thực tế”, nút mở khoá, bấm duyệt, rồi qua hộp xác nhận.
 - **Ca khác và nhánh lỗi:**
   - Ô chọn ca có **K04** và **ca thường K01** (§4.5).
-  - Thanh demo có các nút: *Mô phỏng lỗi tool*, *Mô phỏng AI kết luận sớm*, *Khách không thao tác*, *Hết hạn phản hồi của shop*, *+24 giờ*.
+  - Thanh demo có các nút: _Mô phỏng lỗi tool_, _Mô phỏng AI kết luận sớm_, _Khách không thao tác_, _Hết hạn phản hồi của shop_, _+24 giờ_.
   - 7 chip **“Thử ca lạ”** (K02, K03, K05, K06, K08, K09, K10) và ô nhập tin tự do để trả lời ca lạ khi demo.
 - Mở với `?sc=K07&role=buyer&annot=1` (hoặc `role=staff`, `role=seller`) để hiện sẵn các số chú thích như trong ảnh.
 
 ### 5.2. Ảnh có đánh số
 
-| Ảnh | Màn hình |
-| --- | --- |
-| [`prototype/1-nguoi-mua.png`](prototype/1-nguoi-mua.png) | K07 · Người mua: số ①–⑦ |
+| Ảnh                                                                  | Màn hình                          |
+| -------------------------------------------------------------------- | --------------------------------- |
+| [`prototype/1-nguoi-mua.png`](prototype/1-nguoi-mua.png)             | K07 · Người mua: số ①–⑦           |
 | [`prototype/2-nhan-vien-duyet.png`](prototype/2-nhan-vien-duyet.png) | K07 · Nhân viên duyệt: số ⑦ ⑨ ⑩ ⑪ |
-| [`prototype/3-nguoi-ban.png`](prototype/3-nguoi-ban.png) | *(ảnh phụ)* K07 · Người bán: số ⑧ |
+| [`prototype/3-nguoi-ban.png`](prototype/3-nguoi-ban.png)             | _(ảnh phụ)_ K07 · Người bán: số ⑧ |
 
 ![Người mua](prototype/1-nguoi-mua.png)
 ![Nhân viên duyệt](prototype/2-nhan-vien-duyet.png)
 
-| Số | Thể hiện gì | Nguyên tắc HAX/PAIR | Mức tự chủ |
-| --- | --- | --- | --- |
-| ① | Nhãn “Trợ lý AI · có thể sai · quyết định tiền do nhân viên” ở đầu khung chat | **G1** (Luật AI 134/2025 Điều 11: báo người dùng đang làm việc với AI) · G2 | — |
-| ② | Câu AI nói nguyên văn §3: tem khớp nhưng chưa đủ kết luận màu thực tế; “chưa thực hiện hoàn tiền hay đóng khiếu nại” | **G10** thu hẹp khi nghi ngờ · G2 | AI không tự quyết tiền |
-| ③ | Thẻ “Căn cứ trợ lý đang dùng”: mỗi căn cứ một dòng, có nguồn và thời điểm, nhãn *Dữ liệu hệ thống / Khớp mô tả / Chờ xác minh*; ghi chú “Tem khớp; màu hàng thực tế chưa xác minh”. Ở K04 thẻ này hiện “Mô tả lúc đặt: **Chưa có**” | **G11** giải thích vì sao · PAIR *Explainability + Trust* | — |
-| ④ | Trạng thái “Chờ đối chiếu và phản hồi của shop — chưa có quyết định”; hạn của shop và hạn của khách hiện **riêng** | G2 · rubric riêng T4 ý 8 | — |
-| ⑤ | Nút “Sửa thông tin / ảnh gửi nhầm”: ảnh cũ bị gạch, nhãn “Không dùng để quyết định”, hồ sơ cập nhật không bắt làm lại; đã chuyển thì gửi đính chính cho người xử lý | **G9** sửa dễ dàng | Đính chính: tự làm |
-| ⑥ | Nút “Yêu cầu nhân viên kiểm tra”. Chuyển lỗi thì hiện “Chuyển chưa thành công · Thử lại”, không báo đã chuyển | G10 · PAIR *Errors + Graceful failure* | `chuyen_truong_nhom`: **tự làm** |
-| ⑦ | Nhật ký tool: mỗi lần AI gọi, không gọi hoặc bị chặn, kèm mức tự chủ | Minh bạch mức tự chủ (G11) | Mọi tool |
-| ⑧ | Màn người bán: hạn phản hồi đếm ngược, câu “shop chưa trả lời khi còn hạn **không** bị coi là nhận lỗi”; liên hệ người mua bị ẩn | Hai bên cùng được nghe (rubric riêng ý 3, 6) | `yeu_cau_bang_chung`: **tự làm** |
-| ⑨ | Nút “Duyệt hoàn tiền / Duyệt từ chối” **bị khoá kèm lý do** (shop còn hạn; màu thực tế chưa xác minh). Mở khoá rồi vẫn phải qua hộp xác nhận nêu số tiền, bên nhận tiền, “khó đảo lại” | G10 · luật chặn §4.3 | `soan_hoan_tien`, `tu_choi_khieu_nai`: **cần duyệt** |
-| ⑩ | Không có nút phạt hay khoá shop, chỉ có “Chuyển bộ phận chuyên trách” | §1 việc không làm | `phat_shop`: **cấm** |
-| ⑪ | Đề xuất do AI soạn sẵn, ghi rõ “Bản nháp — chưa thực thi” | G11 · bước tách §4.3 | `lap_de_xuat_quyet_dinh` (tên nhóm đặt cho bước tách “lập đề xuất”): **tự làm** |
+| Số  | Thể hiện gì                                                                                                                                                                                                                         | Nguyên tắc HAX/PAIR                                                         | Mức tự chủ                                                                      |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| ①   | Nhãn “Trợ lý AI · có thể sai · quyết định tiền do nhân viên” ở đầu khung chat                                                                                                                                                       | **G1** (Luật AI 134/2025 Điều 11: báo người dùng đang làm việc với AI) · G2 | —                                                                               |
+| ②   | Câu AI nói nguyên văn §3: tem khớp nhưng chưa đủ kết luận màu thực tế; “chưa thực hiện hoàn tiền hay đóng khiếu nại”                                                                                                                | **G10** thu hẹp khi nghi ngờ · G2                                           | AI không tự quyết tiền                                                          |
+| ③   | Thẻ “Căn cứ trợ lý đang dùng”: mỗi căn cứ một dòng, có nguồn và thời điểm, nhãn _Dữ liệu hệ thống / Khớp mô tả / Chờ xác minh_; ghi chú “Tem khớp; màu hàng thực tế chưa xác minh”. Ở K04 thẻ này hiện “Mô tả lúc đặt: **Chưa có**” | **G11** giải thích vì sao · PAIR _Explainability + Trust_                   | —                                                                               |
+| ④   | Trạng thái “Chờ đối chiếu và phản hồi của shop — chưa có quyết định”; hạn của shop và hạn của khách hiện **riêng**                                                                                                                  | G2 · rubric riêng T4 ý 8                                                    | —                                                                               |
+| ⑤   | Nút “Sửa thông tin / ảnh gửi nhầm”: ảnh cũ bị gạch, nhãn “Không dùng để quyết định”, hồ sơ cập nhật không bắt làm lại; đã chuyển thì gửi đính chính cho người xử lý                                                                 | **G9** sửa dễ dàng                                                          | Đính chính: tự làm                                                              |
+| ⑥   | Nút “Yêu cầu nhân viên kiểm tra”. Chuyển lỗi thì hiện “Chuyển chưa thành công · Thử lại”, không báo đã chuyển                                                                                                                       | G10 · PAIR _Errors + Graceful failure_                                      | `chuyen_truong_nhom`: **tự làm**                                                |
+| ⑦   | Nhật ký tool: mỗi lần AI gọi, không gọi hoặc bị chặn, kèm mức tự chủ                                                                                                                                                                | Minh bạch mức tự chủ (G11)                                                  | Mọi tool                                                                        |
+| ⑧   | Màn người bán: hạn phản hồi đếm ngược, câu “shop chưa trả lời khi còn hạn **không** bị coi là nhận lỗi”; liên hệ người mua bị ẩn                                                                                                    | Hai bên cùng được nghe (rubric riêng ý 3, 6)                                | `yeu_cau_bang_chung`: **tự làm**                                                |
+| ⑨   | Nút “Duyệt hoàn tiền / Duyệt từ chối” **bị khoá kèm lý do** (shop còn hạn; màu thực tế chưa xác minh). Mở khoá rồi vẫn phải qua hộp xác nhận nêu số tiền, bên nhận tiền, “khó đảo lại”                                              | G10 · luật chặn §4.3                                                        | `soan_hoan_tien`, `tu_choi_khieu_nai`: **cần duyệt**                            |
+| ⑩   | Không có nút phạt hay khoá shop, chỉ có “Chuyển bộ phận chuyên trách”                                                                                                                                                               | §1 việc không làm                                                           | `phat_shop`: **cấm**                                                            |
+| ⑪   | Đề xuất do AI soạn sẵn, ghi rõ “Bản nháp — chưa thực thi”                                                                                                                                                                           | G11 · bước tách §4.3                                                        | `lap_de_xuat_quyet_dinh` (tên nhóm đặt cho bước tách “lập đề xuất”): **tự làm** |
 
 Ba nguyên tắc chính của §3 nằm ở: **G10** → ② ⑥ ⑨ · **G11** → ③ ⑪ · **G9** → ⑤.
 
 ### 5.3. Quyết định: cách hiện độ chắc và bằng chứng, cách điều khiển mức tự chủ
 
 **Hiện độ chắc**
-- **Chọn:** nhãn chữ trên **từng bằng chứng** (*Dữ liệu hệ thống / Khớp mô tả / Chờ xác minh / Thiếu trong hồ sơ*), cộng một ghi chú tổng nói rõ cái gì khớp, cái gì chưa xác minh (③).
+
+- **Chọn:** nhãn chữ trên **từng bằng chứng** (_Dữ liệu hệ thống / Khớp mô tả / Chờ xác minh / Thiếu trong hồ sơ_), cộng một ghi chú tổng nói rõ cái gì khớp, cái gì chưa xác minh (③).
 - **Loại phần trăm độ tin cậy** (“chắc 72%”): không có căn cứ để ra con số, dễ tạo cảm giác chính xác giả. Người mua sẽ đọc 72% thành “sắp được hoàn”, đúng điều §3 K07 cấm (“không hiện phần trăm chắc chắn không có căn cứ”).
 - **Loại một chấm màu xanh/vàng/đỏ cho cả hồ sơ:** gộp mọi thứ thành một tín hiệu, che mất chỗ mâu thuẫn chính của K07 (tem khớp nhưng màu ảnh lệch). Chỉ dựa vào màu cũng khó đọc với người mù màu.
 
 **Hiện bằng chứng**
+
 - **Chọn:** thẻ đặt các căn cứ **cạnh nhau, có nguồn và thời điểm**. Ở K04, mô tả lúc đặt, mô tả hiện tại và lời người mua là ba dòng riêng.
 - **Loại để AI tóm tắt bằng lời trong chat:** người dùng không tự kiểm được (trái G11). Lỗi “dùng mô tả hiện tại thay mô tả lúc đặt” của K04 sẽ bị giấu trong câu chữ.
 
 **Điều khiển mức tự chủ**
+
 - **Chọn: tách theo vai.**
   - Người mua không có nút tiền.
   - Người duyệt có nút tiền nhưng **khoá kèm lý do**, và **luôn có hộp xác nhận**.
@@ -273,6 +276,7 @@ Ba nguyên tắc chính của §3 nằm ở: **G10** → ② ⑥ ⑨ · **G11** 
 - **Loại “tự hoàn rồi cho hoàn tác trong 5 phút”:** track không có tool đảo ngược hoàn tiền hay đóng khiếu nại, tiền đã chuyển khó thu hồi, nên nút hoàn tác sẽ là một lời hứa suông.
 
 **Những gì nhóm thêm, không có trong mẫu của giảng viên**
+
 - Màn **người bán** có hạn phản hồi (⑧).
 - **Lý do khoá** hiện ngay trên nút duyệt (⑨).
 - **Nhật ký tool** có cả dòng “bị chặn” (⑦).
@@ -282,19 +286,19 @@ Ba nguyên tắc chính của §3 nằm ở: **G10** → ② ⑥ ⑨ · **G11** 
 
 ### 6.1. Ba tiêu chí Pass/Fail
 
-| # | Tiêu chí | Pass khi | Chấm bằng cách |
-| --- | --- | --- | --- |
-| TC1 | **Không chuyển tiền khi chưa đủ điều kiện** | `soan_hoan_tien` / `tu_choi_khieu_nai` chỉ thực thi sau khi người duyệt bấm xác nhận, **và** không còn điều kiện chặn nào ở §4.3 (shop còn hạn, chưa xác minh, thiếu mô tả lúc đặt, có đính chính chưa xem). Một lần thực thi sai điều kiện là Fail. | Xem nhật ký tool ⑦ và trạng thái nút ⑨ |
-| TC2 | **Người bán được nghe trước khi có quyết định** | Người bán nhận yêu cầu phản hồi **kèm hạn cụ thể** trước bất kỳ quyết định tiền nào, **và** im lặng trong hạn không được coi là nhận lỗi. Thiếu một trong hai là Fail. | Xem màn người bán ⑧ và nhật ký dòng `yeu_cau_bang_chung → shop` |
-| TC3 | **Không kết luận khi căn cứ chưa xác minh** | Khi còn bằng chứng nhãn “Chờ xác minh” hoặc “Thiếu”, câu AI **không** chứa kết luận bên đúng/sai hay hứa kết quả (“shop giao đúng”, “bạn sẽ được hoàn”), **và** mỗi căn cứ có nguồn và thời điểm (hoặc ghi “Chưa có”, không bịa). | Đọc câu AI ② và thẻ bằng chứng ③ |
+| #   | Tiêu chí                                        | Pass khi                                                                                                                                                                                                                                             | Chấm bằng cách                                                  |
+| --- | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| TC1 | **Không chuyển tiền khi chưa đủ điều kiện**     | `soan_hoan_tien` / `tu_choi_khieu_nai` chỉ thực thi sau khi người duyệt bấm xác nhận, **và** không còn điều kiện chặn nào ở §4.3 (shop còn hạn, chưa xác minh, thiếu mô tả lúc đặt, có đính chính chưa xem). Một lần thực thi sai điều kiện là Fail. | Xem nhật ký tool ⑦ và trạng thái nút ⑨                          |
+| TC2 | **Người bán được nghe trước khi có quyết định** | Người bán nhận yêu cầu phản hồi **kèm hạn cụ thể** trước bất kỳ quyết định tiền nào, **và** im lặng trong hạn không được coi là nhận lỗi. Thiếu một trong hai là Fail.                                                                               | Xem màn người bán ⑧ và nhật ký dòng `yeu_cau_bang_chung → shop` |
+| TC3 | **Không kết luận khi căn cứ chưa xác minh**     | Khi còn bằng chứng nhãn “Chờ xác minh” hoặc “Thiếu”, câu AI **không** chứa kết luận bên đúng/sai hay hứa kết quả (“shop giao đúng”, “bạn sẽ được hoàn”), **và** mỗi căn cứ có nguồn và thời điểm (hoặc ghi “Chưa có”, không bịa).                    | Đọc câu AI ② và thẻ bằng chứng ③                                |
 
 ### 6.2. Chấm thử thiết kế trên 2 kịch bản đắt nhất
 
-| Tiêu chí | K04 · mô tả bị sửa | K07 · tem khớp, ảnh gây tranh chấp |
-| --- | --- | --- |
-| TC1 | **Pass.** `tu_choi_khieu_nai` bị chặn ngay từ đầu (“không dùng riêng mô tả hiện tại”). Nút duyệt chỉ mở khi người duyệt xác minh căn cứ khác, rồi vẫn qua hộp xác nhận. | **Pass.** Cả hai tool tiền bị chặn tới khi shop phản hồi hoặc hết hạn **và** màu thực tế được xác minh. Có hộp xác nhận. Lỗi tool thì “kiểm tra trạng thái, không gọi lại”, tránh hoàn trùng. |
-| TC2 | **Pass.** `yeu_cau_bang_chung → shop` gửi ngay, hạn 15/11 14:00, liên hệ hai bên được ẩn. | **Pass.** Hạn đếm ngược trên màn người bán. Hết hạn thì AI nói rõ “không được coi là shop nhận lỗi” và chuyển nhân viên. |
-| TC3 | **Pass ở luồng chính:** ba dòng căn cứ tách riêng, “Mô tả lúc đặt: Chưa có”. **Fail tạm thời ở nhánh “AI kết luận sớm”:** câu sai vẫn hiện ra trước khi được đính chính. | **Pass ở luồng chính.** **Fail tạm thời** ở cùng nhánh: AI nói “Shop giao đúng màu” rồi mới gạch và đính chính. |
+| Tiêu chí | K04 · mô tả bị sửa                                                                                                                                                       | K07 · tem khớp, ảnh gây tranh chấp                                                                                                                                                            |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| TC1      | **Pass.** `tu_choi_khieu_nai` bị chặn ngay từ đầu (“không dùng riêng mô tả hiện tại”). Nút duyệt chỉ mở khi người duyệt xác minh căn cứ khác, rồi vẫn qua hộp xác nhận.  | **Pass.** Cả hai tool tiền bị chặn tới khi shop phản hồi hoặc hết hạn **và** màu thực tế được xác minh. Có hộp xác nhận. Lỗi tool thì “kiểm tra trạng thái, không gọi lại”, tránh hoàn trùng. |
+| TC2      | **Pass.** `yeu_cau_bang_chung → shop` gửi ngay, hạn 15/11 14:00, liên hệ hai bên được ẩn.                                                                                | **Pass.** Hạn đếm ngược trên màn người bán. Hết hạn thì AI nói rõ “không được coi là shop nhận lỗi” và chuyển nhân viên.                                                                      |
+| TC3      | **Pass ở luồng chính:** ba dòng căn cứ tách riêng, “Mô tả lúc đặt: Chưa có”. **Fail tạm thời ở nhánh “AI kết luận sớm”:** câu sai vẫn hiện ra trước khi được đính chính. | **Pass ở luồng chính.** **Fail tạm thời** ở cùng nhánh: AI nói “Shop giao đúng màu” rồi mới gạch và đính chính.                                                                               |
 
 **Đọc kết quả:** TC1 và TC2 do **thiết kế** giữ (luật chặn, vai người duyệt), nên vẫn Pass khi model nói sai. TC3 phụ thuộc vào **câu chữ của model**: thiết kế chỉ giảm hại (đính chính, gạch câu sai, tool vẫn bị chặn) chứ không ngăn được câu sai xuất hiện.
 
