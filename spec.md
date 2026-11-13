@@ -11,7 +11,7 @@
 | Họ và Tên       | Mã Học Viên | Việc đã làm                                  |
 | --------------- | ----------- | -------------------------------------------- |
 | Trần Quang Hưng | 2A202603767 | §1. Lát cắt, hỗ trợ §3.                      |
-| Vũ Tuấn Đạt     | 03744       |                                              |
+| Vũ Tuấn Đạt     | 2A202603744 | Dựng UI prototype, hỗ trợ §2, §3.            |
 | Nguyễn Tiến Đạt | 2A202603752 | Xây dựng kịch bản, phân tích kịch bản, tools |
 
 ## §1. Lát cắt & phạm vi
