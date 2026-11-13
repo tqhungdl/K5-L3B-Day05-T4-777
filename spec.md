@@ -24,7 +24,7 @@
 
 - 3 việc tính năng KHÔNG làm, mỗi việc một câu vì sao.
 
-|  | Mã Học Viên | Việc đã làm |
+|  |  |  |
 |---|---|---|
 |  |  |  |
 |  |  |  |
