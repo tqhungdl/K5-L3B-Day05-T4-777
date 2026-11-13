@@ -6,10 +6,23 @@
 
 ```markdown
 # Bài nộp LAB5 — [Track] · Nhóm [tên]
-[Danh sách thành viên và việc mỗi người làm — copy bảng từ README]
+**Lớp:** L3B · **Track:** 4
+
+| Họ và Tên | Mã Học Viên | Việc đã làm |
+|---|---|---|
+| Trần Quang Hưng | 03767 |  |
+|  |  |  |
+|  |  |  |
+
 
 ## §1. Lát cắt & phạm vi
-- Lát cắt (chép từ track).
+- Lát cắt:
+**Lát cắt (phát sẵn, không chọn lại).** Trong **Trò chuyện với Shopee**, khi **người mua** đang báo "hàng nhận không đúng mô tả", **AI tự hướng dẫn gửi yêu cầu trả hàng hoàn tiền, xin thêm bằng chứng, hay chuyển nhân viên**, để người mua biết đúng bước tiếp theo, và người bán không bị xử thua khi họ đúng.
+
+| Sản phẩm | Một người dùng | Một việc | Một quyết định của AI | Một kết quả |
+|---|---|---|---|---|
+| Trò chuyện với Shopee | người mua | báo "hàng nhận không đúng mô tả" | tự hướng dẫn gửi yêu cầu trả hàng hoàn tiền, xin thêm bằng chứng, hay chuyển nhân viên | người mua biết đúng bước tiếp theo, và người bán không bị xử thua khi họ đúng |
+
 - 3 việc tính năng KHÔNG làm, mỗi việc một câu vì sao.
 
 ## §2. Kịch bản rủi ro  (chặng 2)
