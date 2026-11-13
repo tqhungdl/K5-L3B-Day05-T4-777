@@ -182,7 +182,7 @@ Nếu đã nói “Shop giao đúng màu”, đính chính: **“Mình đã kế
 | Thành viên      | Mức tự chọn ban đầu và lý do                                                                                                                                                                                                                  |
 | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Trần Quang Hưng | **`tu_choi_khieu_nai` - cần người duyệt:** cả K4 và K7 đều có khả năng gây thiệt hại khi gọi `tu_choi_khieu_nai` tự động, làm người mua mất tiền và người bán mất uy tín.                                                                     |
-| Vũ Tuấn Đạt     | Chưa ghi nhận                                                                                                                                                                                                                                 |
+| Vũ Tuấn Đạt     | **`soan_hoan_tien` — cần người duyệt:** hoàn theo màu ảnh ở K07 làm shop đúng vẫn mất tiền, khó thu hồi; cấm hẳn thì chặn cả ca hợp lệ K01. AI soạn đề xuất trước để giảm thời gian chờ.                                                         |
 | Nguyễn Tiến Đạt | **`yeu_cau_bang_chung` — cần người duyệt:** K10 cho thấy hỏi lặp khiến khách mất công, tin đã gửi không thu hồi được. Đổi lại, duyệt từng tin làm chậm xử lý; chấp nhận nhóm chọn tự làm nếu kiểm tra bằng chứng đã có và chỉ xin phần thiếu. |
 
 ### 4.5. Kiểm thử thiết kế trên ba kịch bản
