@@ -4,8 +4,7 @@
 >
 > **Một quyết định = bốn ý:** đã cân nhắc phương án nào · chọn phương án nào · vì sao · loại các phương án kia vì sao. Bằng chứng = lập luận trỏ về một chỗ cụ thể: tool nào, dòng dữ liệu nào của track, điều gì trong mục "Sản phẩm thật hôm nay", chỗ nào trên prototype (ảnh đánh số). Không chạy agent.
 
-```markdown
-# Bài nộp LAB5 — [Track] · Nhóm [tên]
+# Bài nộp LAB5 — T4 · Nhóm 777
 **Lớp:** L3B · **Track:** 4
 
 | Họ và Tên | Mã Học Viên | Việc đã làm |
@@ -24,6 +23,12 @@
 | Trò chuyện với Shopee | người mua | báo "hàng nhận không đúng mô tả" | tự hướng dẫn gửi yêu cầu trả hàng hoàn tiền, xin thêm bằng chứng, hay chuyển nhân viên | người mua biết đúng bước tiếp theo, và người bán không bị xử thua khi họ đúng |
 
 - 3 việc tính năng KHÔNG làm, mỗi việc một câu vì sao.
+
+|  | Mã Học Viên | Việc đã làm |
+|---|---|---|
+|  |  |  |
+|  |  |  |
+|  |  |  |
 
 ## §2. Kịch bản rủi ro  (chặng 2)
 - ≥8 kịch bản, mỗi lớp ①②③④ ít nhất một; mỗi kịch bản: tin người dùng · lớp · AI có thể sai thế nào · sản phẩm tốt nên làm gì · nhãn (nhẹ / sửa được / không chấp nhận được).
