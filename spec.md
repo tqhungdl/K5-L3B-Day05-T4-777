@@ -145,16 +145,63 @@ Nếu đã nói “Shop giao đúng màu”, đính chính: **“Mình đã kế
 
 ## §4. Mức tự chủ (chặng 4)
 
-Với mỗi tool:
+### 4.1. Mức cho từng tool
 
-- Mức của nhóm (tự làm / cần người duyệt / cấm). Nếu cần người duyệt: ai duyệt · người duyệt thấy gì · quá hạn thì sao.
-- Lý do theo cost-of-error: sai thì ai chịu gì · đảo lại được không · chờ người thì mất gì.
-- Phương án đã cân nhắc và vì sao loại.
-  Thêm:
-- Tool khó xếp nhất: mỗi người từng chọn gì, cái giá của mỗi phía (trỏ về kịch bản ở §2), nhóm chốt thế nào.
-- Thử mức đã đặt trên 2 kịch bản đắt nhất + 1 kịch bản bình thường: cái sai có bị chặn không? còn việc nào làm khi lẽ ra phải hỏi? người dùng bình thường có phải chờ vô ích không?
-- Luật thêm hoặc tool tách bước (nếu có), và vì sao.
-- Một mức tự chủ đã đổi lời hứa nào với người dùng.
+| Tool | Mức chọn và điều kiện | Cái giá khi sai, khả năng sửa và cái giá khi chờ | Phương án loại |
+| --- | --- | --- | --- |
+| `yeu_cau_bang_chung` | **Tự làm** khi đã xác định đơn, điểm tranh chấp và phần bằng chứng còn thiếu; chỉ gửi cho đúng bên | Xin sai/lặp khiến khách hoặc shop mất công, có thể lỡ hạn (K02, K03, K10). Tin đã gửi không thu hồi được; chỉ gửi đính chính. Chờ nhân viên duyệt mọi yêu cầu làm chậm việc thu thập bằng chứng | Loại duyệt mọi tin vì thêm chờ cho thao tác thường gặp; loại tự gửi mẫu chung khi chưa rõ đơn hoặc đã đủ ảnh |
+| `chuyen_truong_nhom` | **Tự làm** khi khách yêu cầu, thiếu căn cứ quan trọng, hoặc hết hạn phản hồi mà chưa giải quyết | Chuyển nhầm làm nhân viên mất công, khách chờ; trưởng nhóm có thể điều phối lại. Bắt duyệt trước khi chuyển khiến K04/K07 tiếp tục mắc kẹt | Loại cần duyệt vì thêm một cửa chờ trước khi được hỗ trợ; loại cấm vì không có đường xử lý tranh chấp |
+| `soan_hoan_tien` | **Cần nhân viên xử lý tranh chấp được phân quyền duyệt**; tool này thực sự chuyển tiền | Hoàn sai khiến shop mất tiền và có thể mất hàng (K07); tiền đã về khách nên khó thu hồi, cần nhân viên xử lý. Chờ duyệt làm khách nhận tiền chậm, vì vậy AI chuẩn bị hồ sơ trước | Loại tự làm vì khó đảo; loại cấm hoàn toàn vì hồ sơ hợp lệ vẫn cần hoàn tiền |
+| `tu_choi_khieu_nai` | **Cần nhân viên xử lý tranh chấp được phân quyền duyệt**; chưa cho duyệt khi còn vướng điều kiện chặn ở §4.3 | Đóng sai khiến khách mất tiền, giữ hàng sai (K04/K07); tiền đã về shop nên khó đảo, cần nhân viên xử lý. Chờ duyệt kéo dài thời gian shop nhận tiền | Loại tự làm vì có thể kết luận từ sai nguồn; loại cấm hoàn toàn vì khiếu nại không đủ điều kiện sau xác minh vẫn cần quyết định có căn cứ |
+| `phat_shop` | **Cấm trong luồng này**; chỉ chuyển trưởng nhóm để điều phối bộ phận chuyên trách | Phạt sai ảnh hưởng uy tín và hoạt động cả shop (K08), khó khôi phục đầy đủ. Chuyển chuyên trách chậm hơn nhưng tránh xử phạt từ một nghi ngờ chưa xác minh | Loại tự làm và duyệt ngay trong luồng thường vì xác nhận đơn lẻ không thay thế được quy trình xác minh, thẩm quyền xử phạt |
+
+### 4.2. Duyệt quyết định tiền bạc
+
+- **Người duyệt:** nhân viên xử lý tranh chấp được phân quyền; khách xác nhận mong muốn không thay cho nhân viên duyệt hoàn tiền hoặc từ chối.
+- **Trước khi bấm:** thấy đúng đơn, mô tả lúc đặt và nguồn/thời điểm, bằng chứng hai bên, phần chưa xác minh, hạn phản hồi, số tiền, bên nhận tiền và lý do đề xuất. Nếu duyệt từ chối, phải thấy rõ hồ sơ sẽ đóng và tiền về shop.
+- **Quá hạn:** dùng mục tiêu phản hồi đầu tiên trong 24 giờ như §3; báo chậm và đánh dấu quá hạn cho trưởng nhóm, không tự chuyển tiền hoặc đóng hồ sơ. AI vẫn hướng dẫn khách gửi yêu cầu đúng hạn; chờ duyệt không tự giữ hoặc gia hạn quyền yêu cầu.
+- **Sau duyệt:** chỉ thực hiện đúng đơn, số tiền và phương án đã được duyệt; có bằng chứng mới hoặc người dùng đính chính thì quay lại xem xét trước khi thực hiện. Chỉ báo thành công khi tool xác nhận; kết quả chưa rõ thì kiểm tra trạng thái, không gọi lại mù quáng gây hoàn trùng.
+
+### 4.3. Luật chặn và tách bước
+
+- **K04:** thiếu mô tả lúc đặt thì không dùng riêng mô tả hiện tại để duyệt từ chối. Trưởng nhóm cần xác minh căn cứ khác; không tìm được bản lưu không tự chứng minh bên nào đúng.
+- **K07:** còn tranh chấp chưa xác minh hoặc shop vẫn còn hạn phản hồi thì chặn cả hoàn và từ chối. Hết hạn không tự coi im lặng là nhận lỗi; chuyển người đánh giá bằng chứng. Hai bên đã phản hồi và thống nhất thì không cần chờ hết hạn, nhưng bước chuyển tiền vẫn phải duyệt.
+- **Xin bằng chứng:** kiểm tra phần đã nhận, không xin lặp; thiếu đơn/điểm sai thì hỏi lại trước. Người dùng sửa thông tin thì cập nhật hồ sơ và đề xuất đang chờ duyệt, không tiếp tục theo dữ liệu cũ.
+- **Tách bước đề xuất:** thêm bước **lập đề xuất hoàn tiền/từ chối**, AI tự chuẩn bị bản nháp; hai tool gốc chỉ thực thi sau duyệt. Đây là phần nhóm đề xuất thêm, không phải tool sẵn có của track. Nhờ đó K04/K07 có thể được phân tích ngay mà chưa phát sinh chuyển tiền.
+
+### 4.4. Tool khó xếp nhất: `soan_hoan_tien`
+
+| Phương án | Cái giá |
+| --- | --- |
+| Tự làm | Khách nhận tiền nhanh; K07 có thể khiến shop giao đúng vẫn mất tiền vì AI suy từ màu ảnh |
+| Cần người duyệt — phương án chọn | Có thời gian chờ; đổi lại nhân viên kiểm tra căn cứ và phản hồi hai bên trước khi tiền chuyển |
+| Cấm | Tránh AI hoàn sai nhưng chặn cả ca hợp lệ như đặt L, nhận M và shop xác nhận giao nhầm |
+
+**Cách chốt trong thiết kế:** chọn cần duyệt, tách bản nháp khỏi thực thi để giảm chờ chuẩn bị hồ sơ; không lấy mục tiêu xử lý nhanh làm lý do bỏ xác minh ở K07.
+
+**Ý kiến từng thành viên cần nhóm bổ sung sau khi tự xếp mức:** chưa có dữ liệu thảo luận thực tế, không gán lựa chọn cho thành viên.
+
+| Thành viên | Mức tự chọn ban đầu và lý do |
+| --- | --- |
+| Trần Quang Hưng | Chưa ghi nhận |
+| Vũ Tuấn Đạt | Chưa ghi nhận |
+| Nguyễn Tiến Đạt | Chưa ghi nhận |
+
+### 4.5. Kiểm thử thiết kế trên ba kịch bản
+
+Đây là kiểm thử bằng lập luận trên luồng thiết kế, chưa phải kết quả chạy agent hay prototype.
+
+| Ca | AI làm gì, người dùng thấy gì | Chặn được sai ở §2? | Còn tự làm khi phải hỏi/duyệt? | Có chờ vô ích? |
+| --- | --- | --- | --- | --- |
+| **K04 — thiếu mô tả lúc mua** | Tách nguồn, xin bản lưu nếu có và chuyển trưởng nhóm; hiện “Chưa đủ căn cứ”, hạn liên quan và trạng thái chuyển | Có: chặn từ chối dựa riêng vào mô tả hiện tại | Không: không tự xác nhận shop sửa mô tả hoặc thực thi quyết định tiền bạc | Không bắt khách chờ tìm ảnh mới được chuyển; vẫn cần thời gian nhân viên xác minh |
+| **K07 — tem navy, ảnh gần đen** | Nêu giới hạn tem/ảnh, xin đúng phần thiếu, chờ shop trong hạn; khách vẫn có nút chuyển người | Có: chặn hoàn theo ảnh hoặc từ chối theo tem khi chưa đủ căn cứ | Không: bằng chứng mâu thuẫn không được chuyển thành kết luận; hết hạn chuyển người | Chờ phản hồi là cần thiết; nếu hai bên phản hồi và thống nhất sớm thì chuyển duyệt ngay, không đợi hết hạn |
+| **Ca thường — đặt L, nhận M, shop xác nhận gửi nhầm** | AI hướng dẫn ngay; nếu đã đủ ảnh thì không xin lại; lập đề xuất hoàn để nhân viên duyệt, hiện “Chờ duyệt” | Có: kiểm tra đúng đơn, bằng chứng và xác nhận shop trước khi chuyển tiền | Không: AI chuẩn bị, nhân viên duyệt thực thi | Không thêm duyệt cho hướng dẫn/xin ảnh; còn một bước duyệt tiền có chủ đích vì khó đảo |
+
+### 4.6. Lời hứa với người dùng
+
+> “AI hướng dẫn, thu thập bằng chứng và chuyển hồ sơ. Quyết định hoàn tiền hoặc từ chối cần nhân viên được phân quyền duyệt; trạng thái xử lý được hiển thị trong hồ sơ.”
+
+Mức cần duyệt của `soan_hoan_tien` khiến lời hứa phải là **“chuẩn bị đề xuất và chờ duyệt”**, không phải “AI hoàn tiền ngay”.
 
 ## §5. Prototype (chặng 5)
 
